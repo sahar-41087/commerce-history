@@ -40,8 +40,9 @@ class Orders extends \onetableDocLister
             $products = [];
             while ($row = $this->modx->db->getRow($q)) {
                 if ($row['product_id']) {
-                    $row['options'] = json_decode($row['options'], true) ?? [];
-                    $row['meta'] = json_decode($row['meta'], true) ?? [];
+                    
+                    $row['options'] = json_decode($row['options'] ?? '{}', true) ?? [];
+                    $row['meta'] = json_decode($row['meta'] ?? '{}', true) ?? [];
                     $orders[$row['order_id']]['cart']['products'][] = $row;
                     $products[] = $row['product_id'];
                 } else {
